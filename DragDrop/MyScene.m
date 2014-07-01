@@ -8,23 +8,39 @@
 
 #import "MyScene.h"
 
+static NSString * const kAnimalNodeName = @"movable";
+
+@interface MyScene ()
+
+@property (nonatomic, strong) SKSpriteNode *background;
+@property (nonatomic, strong) SKSpriteNode *selectedNode;
+
+@end
+
 @implementation MyScene
 
--(id)initWithSize:(CGSize)size {    
+- (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        // 1) Loading the background
+        _background = [SKSpriteNode spriteNodeWithImageNamed:@"blue-shooting-stars"];
+        [_background setName:@"background"];
+        [_background setAnchorPoint:CGPointZero];
+        [self addChild:_background];
         
-        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
-        myLabel.text = @"Hello, World!";
-        myLabel.fontSize = 30;
-        myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame));
-        
-        [self addChild:myLabel];
+        // 2) Loading the images
+        NSArray *imageNames = @[@"bird", @"cat", @"dog", @"turtle"];
+        for(int i = 0; i < [imageNames count]; ++i) {
+            NSString *imageName = [imageNames objectAtIndex:i];
+            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:imageName];
+            [sprite setName:kAnimalNodeName];
+            
+            float offsetFraction = ((float)(i + 1)) / ([imageNames count] + 1);
+            [sprite setPosition:CGPointMake(size.width * offsetFraction, size.height / 2)];
+            [_background addChild:sprite];
+        }
     }
+    
     return self;
 }
 

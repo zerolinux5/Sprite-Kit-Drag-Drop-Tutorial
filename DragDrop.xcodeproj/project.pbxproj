@@ -24,6 +24,12 @@
 		EA52BF9E1963632A00D6CF3A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA52BF791963632A00D6CF3A /* UIKit.framework */; };
 		EA52BFA61963632A00D6CF3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA52BFA41963632A00D6CF3A /* InfoPlist.strings */; };
 		EA52BFA81963632A00D6CF3A /* DragDropTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52BFA71963632A00D6CF3A /* DragDropTests.m */; };
+		EA52BFB81963637900D6CF3A /* attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = EA52BFB21963637900D6CF3A /* attribution.txt */; };
+		EA52BFB91963637900D6CF3A /* bird.png in Resources */ = {isa = PBXBuildFile; fileRef = EA52BFB31963637900D6CF3A /* bird.png */; };
+		EA52BFBA1963637900D6CF3A /* blue-shooting-stars.png in Resources */ = {isa = PBXBuildFile; fileRef = EA52BFB41963637900D6CF3A /* blue-shooting-stars.png */; };
+		EA52BFBB1963637900D6CF3A /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = EA52BFB51963637900D6CF3A /* cat.png */; };
+		EA52BFBC1963637900D6CF3A /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = EA52BFB61963637900D6CF3A /* dog.png */; };
+		EA52BFBD1963637900D6CF3A /* turtle.png in Resources */ = {isa = PBXBuildFile; fileRef = EA52BFB71963637900D6CF3A /* turtle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +66,12 @@
 		EA52BFA31963632A00D6CF3A /* DragDropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DragDropTests-Info.plist"; sourceTree = "<group>"; };
 		EA52BFA51963632A00D6CF3A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EA52BFA71963632A00D6CF3A /* DragDropTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragDropTests.m; sourceTree = "<group>"; };
+		EA52BFB21963637900D6CF3A /* attribution.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attribution.txt; sourceTree = "<group>"; };
+		EA52BFB31963637900D6CF3A /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
+		EA52BFB41963637900D6CF3A /* blue-shooting-stars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue-shooting-stars.png"; sourceTree = "<group>"; };
+		EA52BFB51963637900D6CF3A /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
+		EA52BFB61963637900D6CF3A /* dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog.png; sourceTree = "<group>"; };
+		EA52BFB71963637900D6CF3A /* turtle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turtle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +133,7 @@
 		EA52BF7D1963632A00D6CF3A /* DragDrop */ = {
 			isa = PBXGroup;
 			children = (
+				EA52BFB11963637900D6CF3A /* DragDropImages */,
 				EA52BF861963632A00D6CF3A /* AppDelegate.h */,
 				EA52BF871963632A00D6CF3A /* AppDelegate.m */,
 				EA52BF891963632A00D6CF3A /* Main.storyboard */,
@@ -162,6 +175,19 @@
 				EA52BFA41963632A00D6CF3A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA52BFB11963637900D6CF3A /* DragDropImages */ = {
+			isa = PBXGroup;
+			children = (
+				EA52BFB21963637900D6CF3A /* attribution.txt */,
+				EA52BFB31963637900D6CF3A /* bird.png */,
+				EA52BFB41963637900D6CF3A /* blue-shooting-stars.png */,
+				EA52BFB51963637900D6CF3A /* cat.png */,
+				EA52BFB61963637900D6CF3A /* dog.png */,
+				EA52BFB71963637900D6CF3A /* turtle.png */,
+			);
+			path = DragDropImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,9 +267,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA52BF821963632A00D6CF3A /* InfoPlist.strings in Resources */,
+				EA52BFBD1963637900D6CF3A /* turtle.png in Resources */,
 				EA52BF951963632A00D6CF3A /* Images.xcassets in Resources */,
+				EA52BFBB1963637900D6CF3A /* cat.png in Resources */,
+				EA52BFBC1963637900D6CF3A /* dog.png in Resources */,
+				EA52BFB91963637900D6CF3A /* bird.png in Resources */,
 				EA52BF931963632A00D6CF3A /* Spaceship.png in Resources */,
 				EA52BF8B1963632A00D6CF3A /* Main.storyboard in Resources */,
+				EA52BFB81963637900D6CF3A /* attribution.txt in Resources */,
+				EA52BFBA1963637900D6CF3A /* blue-shooting-stars.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
