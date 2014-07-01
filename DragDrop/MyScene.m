@@ -44,11 +44,25 @@ static NSString * const kAnimalNodeName = @"movable";
     return self;
 }
 
+/*
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
     [self selectNodeForTouch:positionInScene];
 }
+*/
+
+/*
+ - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+ UITouch *touch = [touches anyObject];
+ CGPoint positionInScene = [touch locationInNode:self];
+ CGPoint previousPosition = [touch previousLocationInNode:self];
+ 
+ CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
+ 
+ [self panForTranslation:translation];
+ }
+ */
 
 - (void)selectNodeForTouch:(CGPoint)touchLocation {
     //1
@@ -98,14 +112,49 @@ float degToRad(float degree) {
     }
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [touches anyObject];
-	CGPoint positionInScene = [touch locationInNode:self];
-	CGPoint previousPosition = [touch previousLocationInNode:self];
-    
-	CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
-    
-	[self panForTranslation:translation];
+- (void)didMoveToView:(SKView *)view {
+    UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
+    [[self view] addGestureRecognizer:gestureRecognizer];
 }
 
+- (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
+	if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
+        CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+        
+        touchLocation = [self convertPointFromView:touchLocation];
+        
+        [self selectNodeForTouch:touchLocation];
+        
+        
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        
+        CGPoint translation = [recognizer translationInView:recognizer.view];
+        translation = CGPointMake(translation.x, -translation.y);
+        [self panForTranslation:translation];
+        [recognizer setTranslation:CGPointZero inView:recognizer.view];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if (![[_selectedNode name] isEqualToString:kAnimalNodeName]) {
+            float scrollDuration = 0.2;
+            CGPoint velocity = [recognizer velocityInView:recognizer.view];
+            CGPoint pos = [_selectedNode position];
+            CGPoint p = mult(velocity, scrollDuration);
+            
+            CGPoint newPos = CGPointMake(pos.x + p.x, pos.y + p.y);
+            newPos = [self boundLayerPos:newPos];
+            [_selectedNode removeAllActions];
+            
+            SKAction *moveTo = [SKAction moveTo:newPos duration:scrollDuration];
+            [moveTo setTimingMode:SKActionTimingEaseOut];
+            [_selectedNode runAction:moveTo];
+        }
+        
+    }
+}
+
+CGPoint mult(const CGPoint v, const CGFloat s) {
+	return CGPointMake(v.x*s, v.y*s);
+}
 @end
