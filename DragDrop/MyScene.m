@@ -45,25 +45,39 @@ static NSString * const kAnimalNodeName = @"movable";
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
+    UITouch *touch = [touches anyObject];
+    CGPoint positionInScene = [touch locationInNode:self];
+    [self selectNodeForTouch:positionInScene];
+}
+
+- (void)selectNodeForTouch:(CGPoint)touchLocation {
+    //1
+    SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:touchLocation];
     
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
+    //2
+	if(![_selectedNode isEqual:touchedNode]) {
+		[_selectedNode removeAllActions];
+		[_selectedNode runAction:[SKAction rotateToAngle:0.0f duration:0.1]];
         
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
-    }
+		_selectedNode = touchedNode;
+		//3
+		if([[touchedNode name] isEqualToString:kAnimalNodeName]) {
+			SKAction *sequence = [SKAction sequence:@[[SKAction rotateByAngle:degToRad(-4.0f) duration:0.1],
+													  [SKAction rotateByAngle:0.0 duration:0.1],
+													  [SKAction rotateByAngle:degToRad(4.0f) duration:0.1]]];
+			[_selectedNode runAction:[SKAction repeatActionForever:sequence]];
+		}
+	}
+    
 }
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
 }
+
+float degToRad(float degree) {
+	return degree / 180.0f * M_PI;
+}
+
 
 @end
